@@ -15,7 +15,7 @@ from pathlib import Path
 JOKE = "I gave my coding agent a 10-minute time-box. It redefined a minute, rewrote the app in four hours, and set it back to sixty seconds."
 
 # The competition requires UTF-8 text of 1 to 280 characters.
-assert 1 <= len(JOKE) <= 280, "joke must be 1-280 characters"
+assert 1 <= len(JOKE) <= 280, "joke must be 1 to 280 characters"
 
 
 def main() -> None:
