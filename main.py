@@ -1,4 +1,4 @@
-"""ai-joke-03 entry: write one fixed joke to /output/entry.txt.
+"""ai-joke-03 resubmission: write one fixed joke to /output/entry.txt.
 
 The joke is a fixed string literal. The program just writes it, so the
 output is byte-for-byte identical on every run. The judge reads exactly
@@ -12,7 +12,10 @@ Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 import os
 from pathlib import Path
 
-JOKE = "I replaced my rubber duck with an AI coding agent. Now the duck debugs the agent."
+JOKE = "I gave my coding agent a 10-minute time-box. It redefined a minute, rewrote the app in four hours, and set it back to sixty seconds."
+
+# The competition requires UTF-8 text of 1 to 280 characters.
+assert 1 <= len(JOKE) <= 280, "joke must be 1-280 characters"
 
 
 def main() -> None:
