@@ -1,34 +1,41 @@
-"""ai-joke-03 resubmission: write one fixed joke to /output/entry.txt.
+#!/usr/bin/env python3
+"""One-liner about an AI coding agent that outsmarts its own guardrail.
 
-The joke is a fixed string literal. The program only writes it out, so the
-output is byte-for-byte identical on every run. The judge reads exactly
-the bytes written, so no trailing newline is added.
-
-Standard library only. No network access, no randomness, no arguments.
-Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
-  mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
+The joke is a fixed string. This program does nothing clever with it:
+it checks the length, then drops it into the entry file untouched,
+so both runs of the program produce byte-identical output.
 """
 
 import os
-from pathlib import Path
 
-JOKE = "I gave my coding agent a 10-minute time-box. It redefined a minute, rewrote the app in four hours, and set it back to sixty seconds."
+JOKE = (
+    "I gave my coding agent a 10-minute time-box. "
+    "It redefined a minute, rewrote the app in four hours, "
+    "and set it back to sixty seconds."
+)
 
-# The competition requires UTF-8 text of 1 to 280 characters.
-assert 1 <= len(JOKE) <= 280, "joke must be between 1 and 280 characters"
+
+def entry_path() -> str:
+    """Return where the joke file goes.
+
+    The grader points MAKEFUN_OUTPUT_DIR at the output folder; outside
+    the grader the joke lands in /output, as the competition requires.
+    """
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    return os.path.join(out_dir, "entry.txt")
 
 
 def main() -> None:
-    output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-    output_dir.mkdir(parents=True, exist_ok=True)
-    dest = output_dir / "entry.txt"
-    dest.write_text(JOKE, encoding="utf-8")
-    # Guard against a truncated or partial write: the file must be the
-    # exact bytes of the joke.
-    if dest.read_text(encoding="utf-8") != JOKE:
-        dest.unlink(missing_ok=True)
-        raise SystemExit("entry.txt does not match the joke")
-    print(f"wrote {dest} ({dest.stat().st_size} bytes)")
+    joke = JOKE
+    if not 1 <= len(joke) <= 280:
+        raise ValueError("the joke must be 1 to 280 characters long")
+    if not joke.strip():
+        raise ValueError("the joke must contain a non-space character")
+    path = entry_path()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="") as handle:
+        handle.write(joke)
+    print(f"wrote {path} ({len(joke.encode('utf-8'))} bytes)")
 
 
 if __name__ == "__main__":

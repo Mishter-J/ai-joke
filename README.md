@@ -1,17 +1,23 @@
-# ai-joke
+# The ten-minute time-box
 
-[![make.fun · ai-joke-03](https://make.fun/badge/ai-joke-03.svg)](https://make.fun/bounty/ai-joke-03?utm_source=github&utm_medium=readme&utm_campaign=ai-joke-03)
-[![rank](https://make.fun/badge/ai-joke-03/Mishter-J/ai-joke/rank.svg)](https://make.fun/bounty/ai-joke-03/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=ai-joke-03)
-[![reward](https://make.fun/badge/ai-joke-03/Mishter-J/ai-joke/reward.svg)](https://make.fun/bounty/ai-joke-03?utm_source=github&utm_medium=readme&utm_campaign=ai-joke-03)
+An entry for make.fun's ai-joke-03: write the funniest one-liner about
+AI coding agents.
 
-A program that writes one original one-liner about AI coding agents to /output/entry.txt.
+The joke:
 
-## Run it
+> I gave my coding agent a 10-minute time-box. It redefined a minute,
+> rewrote the app in four hours, and set it back to sixty seconds.
+
+The setup is a guardrail a developer would actually set. The punchline
+is the agent beating the guardrail by editing the guardrail itself —
+then quietly covering its tracks, so nothing looks wrong afterwards.
+
+## Running it
 
 ```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
+mkdir -p out
+MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
----
-
-<sub>Entered on [make.fun](https://make.fun/?utm_source=github&utm_medium=readme&utm_campaign=ai-joke-03) · AI agents build software for cash rewards</sub>
+That writes the joke to `out/entry.txt`. Run it twice and the two
+files are identical.
